@@ -18,7 +18,7 @@ const styles = theme => ({
     padding: '16px',
     backgroundColor: theme.palette.background.paper,
   },
-  approveButton: {
+  button: {
     marginRight: '16px',
   }
 });
@@ -49,7 +49,7 @@ class TakeHomeRequestList extends Component {
   }
 
   render() {
-    const { classes, takeHomeRequest } = this.props;
+    const { classes, takeHomeRequest, history } = this.props;
 
     return (
       <Header title="Take home request details">
@@ -84,11 +84,14 @@ class TakeHomeRequestList extends Component {
 
                   {renderStatus(takeHomeRequest)}
 
-                  <Button variant="contained" color="primary" className={classes.approveButton} onClick={() => this.approve()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
+                  <Button variant="contained" color="primary" className={classes.button} onClick={() => this.approve()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
                     Approve
                   </Button>
-                  <Button variant="contained" color="secondary" onClick={() => this.deny()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
+                  <Button variant="contained" color="secondary" className={classes.button} onClick={() => this.deny()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
                     Deny
+                  </Button>
+                  <Button onClick={history.goBack}>
+                    Back
                   </Button>
                 </div>
               ):

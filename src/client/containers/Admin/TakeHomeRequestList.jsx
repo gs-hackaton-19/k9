@@ -14,6 +14,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
 
 import { loadTakeHomeRequests, approveTakeHomeRequest, denyTakeHomeRequest } from '../../thunks';
 import Header from '../Header/Header';
@@ -51,7 +52,7 @@ class TakeHomeRequestList extends Component {
       <Header title="Take home requests">
         <div className={classes.root}>
           <List component="nav">
-            {takeHomeRequests.map(({ _id, pet }) => (
+            {takeHomeRequests.length ? takeHomeRequests.map(({ _id, pet }) => (
               <ListItem key={_id}>
                 <ListItemAvatar>
                   <Avatar src={pet.image} />
@@ -70,7 +71,11 @@ class TakeHomeRequestList extends Component {
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
-            ))}
+            )) : (
+              <Typography variant="h5" gutterBottom>
+                No new take home requests :(
+              </Typography>
+            )}
           </List>
         </div>
       </Header>
