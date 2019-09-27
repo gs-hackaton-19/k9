@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Pet = require('./model/Pet');
+const axios = require('axios');
 const TakeHomeRequest = require('./model/TakeHomeRequest');
 
-//const cageOpenerURL = 'https://ketrecnyito.url';
+const cageOpenerURL = 'http://192.168.43.222:3002/cage/open';
 
 router.get('/api/pet/:id', async (req, res) => {
   const { id } = req.params;
@@ -52,7 +53,7 @@ router.post('/api/takehomerequest/:id/approve', async (req, res) => {
   const request = await TakeHomeRequest.findOneAndUpdate({ _id },
     { approved: approve, disapproved: !approve },
     {new: true});
-  //await axios.get(cageOpenerURL);
+  await axios.get(cageOpenerURL);
   res.json(request);
 });
 
