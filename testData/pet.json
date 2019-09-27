@@ -76,10 +76,9 @@
         "image": "https://placekitten.com/200/300",
         "timeToDie": "2019.09.30",
         "cageId": 4,
-        "coordinates": [47.497913, 19.040236],
+        "coordinates": [47.497913, 80.040236],
         "address": "Macska u., 666",
         "qrCode": "String"
     }
 
 ]
-  

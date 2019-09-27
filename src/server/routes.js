@@ -17,6 +17,13 @@ router.get('/api/pet', async (req, res) => {
   return res.json(pets);
 });
 
+router.get('/api/pet/geo', async (req, res) => {
+  const { lat, long } = req.query;
+  const pets = await Pet.find()
+    .near('coordinates', { center: { coordinates: [10, 10], type: 'Point' }, maxDistance: 5, spherical: true });
+  return res.json(pets);
+});
+
 router.post('/api/pet', async (req, res) => {
   const { body } = req;
   const pet = await Pet.create(body);
@@ -51,7 +58,7 @@ router.post('/api/takehomerequest/:id/approve', async (req, res) => {
   const approve = req.body.approve === 'false' ? false : true;
   const request = await TakeHomeRequest.findOneAndUpdate({ _id },
     { approved: approve, disapproved: !approve },
-    {new: true});
+    { new: true });
   //await axios.get(cageOpenerURL);
   res.json(request);
 });
