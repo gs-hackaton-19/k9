@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Notifications from 'react-notification-system-redux'
 import './App.css';
-import Deck from './component/Deck'
+import Dashboard from './containers/Dashboard'
 
 class App extends Component {
-  state = { pets: [] };
-
-  componentDidMount() {
-    fetch('/api/pet')
-      .then(res => res.json())
-      .then(pets => this.setState({ pets }));
-  }
-
   render() {
     return (
       <div className="App">
-        <Deck pets={this.state.pets} />
-        Valami Más
+        <Dashboard/>
+        <Notifications
+          notifications={this.props.notifications}
+        />
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    loading: state.ui.loading,
+    notifications: state.notifications,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
