@@ -86,3 +86,12 @@ export function loadPets() {
     dispatch(uiActions.loadFinished());
   }
 }
+
+export function sendQR(qrCode) {
+	return async (dispatch, getState) => {
+		dispatch(uiActions.loadStarted());
+		const pet = await axios.get(`/api/pet/qr/${qrCode}`);
+		console.log({ pet })
+		dispatch(uiActions.loadFinished());
+	}
+}

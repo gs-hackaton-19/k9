@@ -9,7 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import Fab from '@material-ui/core/Fab';
-import { loadPets } from '../../thunks';
+import { loadPets, sendQr } from '../../thunks';
+import QrScanner from 'qr-scanner'
 
 const styles = theme => ({
   wrapper: {
@@ -113,7 +114,7 @@ export class Dashboard extends Component {
         if(res instanceof Error) {
           alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
         } else {
-          this.setState({ qrResult: res })
+          this.props.sendQr(res)
         }
       };
       window.qrcode.decode(reader.result);
@@ -184,6 +185,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     loadPets,
+    sendQr,
   }, dispatch)
 }
 
