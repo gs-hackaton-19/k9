@@ -3,11 +3,19 @@
     {
     "name": "Fluffy",
     "species": "Domestic cat",
-    "type": "Ugly",
+    "breed": "Ugly",
     "description": "Don't let yourself be fooled by the strange look. He's also ugly in his personality",
-    "timeToDie": "2019.09.30",
-    "cageId": 1
-    }
-
+    "age": 3,
+    "color": "Gray",
+    "sex": "Male",
+    "behavior": "Peaceful",
+    "image": "https://placekitten.com/200/300",
+    "timeToDie": "2019.09.27",
+    "cageId": 4,
+    "coordinates": [47.497913, 19.040236],
+    "address": "Macska u., 420",
+    "qrCode": "String"
+    },
+    {}
 ]
   
