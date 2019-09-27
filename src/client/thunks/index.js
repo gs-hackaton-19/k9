@@ -91,7 +91,15 @@ export function sendQr(qrCode) {
 	return async (dispatch, getState) => {
 		dispatch(uiActions.loadStarted());
 		const pet = await axios.get(`/api/pet/qr/${qrCode}`);
-    dispatch(uiActions.loadSinglePet(pet));
+    dispatch(uiActions.loadSinglePet(pet.data));
+		dispatch(uiActions.loadFinished());
+	}
+}
+
+export function confirmPet(petId) {
+  return async (dispatch, getState) => {
+		dispatch(uiActions.loadStarted());
+		await axios.get(`/api/pet/${petId}/take`);
 		dispatch(uiActions.loadFinished());
 	}
 }

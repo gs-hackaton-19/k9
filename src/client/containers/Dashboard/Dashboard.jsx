@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import Fab from '@material-ui/core/Fab';
-import { loadPets, sendQr } from '../../thunks';
+import { loadPets, sendQr, confirmPet } from '../../thunks';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
@@ -27,7 +27,7 @@ const styles = theme => ({
   selectedCard: {
     width: 368,
     height: 'calc(70vh - 16px)',
-    padding: 16,
+    paddingBottom: 16,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -123,6 +123,10 @@ export class Dashboard extends Component {
     node.click()
   }
 
+  confirmPet(petId) {
+    this.props.confirmPet(petId)
+  }
+
   scanQR() {
     const node = this.qrInput.current;
     const reader = new FileReader();
@@ -153,9 +157,16 @@ export class Dashboard extends Component {
         {myPet ? (
           <>
             <Paper className={classes.selectedCard}>
+              <div className="image" style={{backgroundImage: `url(${myPet.image})`}}></div>
               <Typography variant="h5" component="h3">
-                  You selected {myPet.name} as your new pet!
-                </Typography>
+                {myPet.name}
+              </Typography>
+              <Typography variant="body1" component="p">
+                {myPet.description}
+              </Typography>
+              <Button className={classes.ctaButton} variant="contained" color="primary" onClick={() => this.confirmPet(myPet._id)}>
+                I want to take it home!
+              </Button>
               <Fab className={classes.ctaButton} color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
                 <CropFreeIcon />
               </Fab>
@@ -236,6 +247,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     loadPets,
     sendQr,
+    confirmPet,
   }, dispatch)
 }
 
