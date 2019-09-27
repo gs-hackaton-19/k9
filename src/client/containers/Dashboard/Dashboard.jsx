@@ -4,12 +4,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 import { withStyles } from '@material-ui/core/styles'
+import { testThunk } from '../../thunks'
 
 const styles = theme => ({
 })
 export class Dashboard extends Component {
   componentWillMount() {
-    // LOAD SOME DATA
+    this.props.testThunk()
   }
 
   render() {
@@ -27,7 +28,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-
+    testThunk,
   }, dispatch)
 }
 

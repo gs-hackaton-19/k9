@@ -7,7 +7,7 @@ import Dashboard from './containers/Dashboard/Dashboard'
 export default () => (
   <App>
     <Switch>
-      <RouteWithLayout path="/" component={Dashboard} />
+      <RouteWithLayout path="/dash" component={Dashboard} />
     </Switch>
   </App>
 )
