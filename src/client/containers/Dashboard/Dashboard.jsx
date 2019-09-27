@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import Fab from '@material-ui/core/Fab';
 import { loadPets, sendQr } from '../../thunks';
-import QrScanner from 'qr-scanner'
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
@@ -173,45 +172,43 @@ export class Dashboard extends Component {
                     onSwipeRight={() => this.onSwipeRight(pet._id)}
                   >
                     <div className={classes.card}>
-                      <Typography variant="h5" component="h3">
-                        {pet.name}
-                      </Typography>
                       <div className="image" style={{backgroundImage: `url(${pet.image})`}}></div>
                       <div className="details">
                         <Typography variant="h5" component="h3">
                           {pet.name}
                         </Typography>
-                        
                         <div className="left-align">
                           <Typography variant="body1" component="p">
+                            <div></div>
                             Species: {pet.species}
                           </Typography>
                           <Typography variant="body1" component="p">
                             Breed: {pet.breed}
                           </Typography>
                           <Typography variant="body1" component="p">
-                            Bescription: {pet.description}
+
+                            Description: {pet.description}
                           </Typography>
                           <Typography variant="body1" component="p">
-                            age: {pet.age}
+                            Age: {pet.age}
                           </Typography>
                           <Typography variant="body1" component="p">
-                          color: {pet.color}
+                            Color: {pet.color}
                           </Typography>
                           <Typography variant="body1" component="p">
-                            sex: {pet.sex}
+                            Sex: {pet.sex}
                           </Typography>
                           <Typography variant="body1" component="p">
-                          behavior: {pet.behavior}
+                            Behavior: {pet.behavior}
                           </Typography>
                           <Typography variant="body1" component="p">
                             <a href={`https://www.google.com/maps/search/?api=1&query=${pet.coordinates[0]},${pet.coordinates[1]}`} target="_blank">Map</a>
                           </Typography>
                           <Typography variant="body1" component="p">
-                          address: {pet.address}
+                            Address: {pet.address}
                           </Typography>
                           <Typography variant="body1" component="p">
-                            sex: {pet.sex}
+                            Sex: {pet.sex}
                           </Typography>
                         </div>
                       </div>
