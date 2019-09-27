@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Pet = require('./model/Pet');
+const TakeHomeRequest = require('./model/TakeHomeRequest');
 
 //const cageOpenerURL = 'https://ketrecnyito.url';
 
@@ -30,8 +31,28 @@ router.post('/api/pet/:id/kill', async (req, res) => {
 });
 
 router.get('/api/pet/:id/take', async (req, res) => {
+  const { id: pet } = req.params;
+  const request = await TakeHomeRequest.create({ userId: 1, pet });
+  return res.json(request);
+});
+
+router.get('/api/takehomerequest', async (req, res) => {
+  const requests = await TakeHomeRequest
+    .find({ approved: false, disapproved: false })
+    .sort({ requestDate: -1 })
+    .populate('pet')
+    .lean();
+  res.json(requests);
+});
+
+router.post('/api/takehomerequest/:id/approve', async (req, res) => {
+  const { id: _id } = req.params;
+  const approve = req.body.approve === 'false' ? false : true;
+  const request = await TakeHomeRequest.findOneAndUpdate({ _id },
+    { approved: approve, disapprove: !approve },
+    {new: true});
   //await axios.get(cageOpenerURL);
-  return res.send('Success');
+  res.json(request);
 });
 
 module.exports = router;
