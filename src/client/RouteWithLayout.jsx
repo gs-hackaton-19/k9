@@ -7,14 +7,18 @@ import { Route } from 'react-router'
 import Notifications from 'react-notification-system-redux'
 
 const styles = theme => ({
+  background: {
+    backgroundColor: '#c8b1e5',
+    height: '100%',
+  }
 })
 
 class RouteWithLayout extends Component {
   render() {
-    const { component, ...props } = this.props
+    const { component, classes, ...props } = this.props
 
     return (
-      <div>
+      <div className={classes.background}>
         <Route exact {...props} render={() => React.createElement(component)} />
         <Notifications
           notifications={this.props.notifications}
