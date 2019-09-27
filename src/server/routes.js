@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Pet = require('./model/Pet');
+const axios = require('axios');
 const TakeHomeRequest = require('./model/TakeHomeRequest');
 
-//const cageOpenerURL = 'https://ketrecnyito.url';
+const cageOpenerURL = 'http://192.168.43.222:3002/cage/open';
 
 router.get('/api/pet/geo', async (req, res) => {
   const { lat, long } = req.query;
@@ -24,6 +25,14 @@ router.get('/api/pet/geo', async (req, res) => {
 router.get('/api/pet/:id', async (req, res) => {
   const { id } = req.params;
   const pet = await Pet.findById(id);
+  return res.json(pet);
+});
+
+router.get('/api/pet/qr/:qrCode', async (req, res) => {
+  const { qrCode } = req.params;
+  const pet = await Pet.findOne({
+    qrCode,
+  });
   return res.json(pet);
 });
 
@@ -62,13 +71,27 @@ router.get('/api/takehomerequest', async (req, res) => {
   res.json(requests);
 });
 
+router.get('/api/takehomerequest/:id', async (req, res) => {
+  const { id } = req.params;
+  const requests = await TakeHomeRequest
+    .findById(id)
+    .populate('pet')
+    .lean();
+  res.json(requests);
+});
+
 router.post('/api/takehomerequest/:id/approve', async (req, res) => {
   const { id: _id } = req.params;
   const approve = req.body.approve === 'false' ? false : true;
   const request = await TakeHomeRequest.findOneAndUpdate({ _id },
     { approved: approve, disapproved: !approve },
-    { new: true });
-  //await axios.get(cageOpenerURL);
+    {new: true});
+  if (approve) try {
+    await axios.get(cageOpenerURL);
+  } catch (err) {
+
+  }
+
   res.json(request);
 });
 

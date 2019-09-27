@@ -70,3 +70,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ```shell script
 docker run -d -p 127.0.0.1:27017:27017 mongo:latest
 ```
+### `alternate mongo run
+
+```sudo docker run -d -p 27017:27017 -v ~/data:/data/db mongo
+```

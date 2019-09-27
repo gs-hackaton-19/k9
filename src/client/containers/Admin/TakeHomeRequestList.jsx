@@ -14,13 +14,16 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
 
 import { loadTakeHomeRequests, approveTakeHomeRequest, denyTakeHomeRequest } from '../../thunks';
+import Header from '../Header/Header';
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    maxWidth: 360,
+    width: 'calc(100% - 32px)',
+    padding: '16px',
+    minHeight: 'calc(100vh - 96px)',
     backgroundColor: theme.palette.background.paper,
   },
 });
@@ -46,30 +49,36 @@ class TakeHomeRequestList extends Component {
     const { classes, takeHomeRequests } = this.props;
 
     return (
-      <div className={classes.root}>
-        <List component="nav">
-          {takeHomeRequests.map(({ _id, pet }) => (
-            <ListItem key={_id}>
-              <ListItemAvatar>
-                <Avatar src={pet.image} />
-              </ListItemAvatar>
+      <Header title="Take home requests">
+        <div className={classes.root}>
+          <List component="nav">
+            {takeHomeRequests.length ? takeHomeRequests.map(({ _id, pet }) => (
+              <ListItem key={_id}>
+                <ListItemAvatar>
+                  <Avatar src={pet.image} />
+                </ListItemAvatar>
 
-              <ListItemLink href="#simple-list">
-                <ListItemText primary={pet.name} secondary="User: Alice"/>
-              </ListItemLink>
+                <ListItemLink href={`/admin/takeHome/${_id}`}>
+                  <ListItemText primary={pet.name} secondary="User: Alice"/>
+                </ListItemLink>
 
-              <ListItemSecondaryAction>
-                <IconButton aria-label="Approve" onClick={() => this.approve(_id)}>
-                  <DoneIcon />
-                </IconButton>
-                <IconButton aria-label="Deny"  onClick={() => this.deny(_id)}>
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-        </List>
-      </div>
+                <ListItemSecondaryAction>
+                  <IconButton aria-label="Approve" onClick={() => this.approve(_id)}>
+                    <DoneIcon />
+                  </IconButton>
+                  <IconButton aria-label="Deny"  onClick={() => this.deny(_id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            )) : (
+              <Typography variant="h5" gutterBottom>
+                No new take home requests :(
+              </Typography>
+            )}
+          </List>
+        </div>
+      </Header>
     );
   }
 }

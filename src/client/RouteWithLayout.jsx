@@ -7,14 +7,17 @@ import { Route } from 'react-router'
 import Notifications from 'react-notification-system-redux'
 
 const styles = theme => ({
+  background: {
+    height: '100%',
+  }
 })
 
 class RouteWithLayout extends Component {
   render() {
-    const { component, ...props } = this.props
+    const { component, classes, ...props } = this.props
 
     return (
-      <div>
+      <div className={classes.background}>
         <Route exact {...props} render={() => React.createElement(component)} />
         <Notifications
           notifications={this.props.notifications}
@@ -32,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    
+
   }, dispatch)
 }
 

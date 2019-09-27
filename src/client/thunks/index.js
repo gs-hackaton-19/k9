@@ -20,7 +20,21 @@ export function loadTakeHomeRequests() {
       dispatch(uiActions.loadFinished());
       return;
     }
-    dispatch(adminActions.loadFinished(data));
+    dispatch(adminActions.loadTakeHomeRequestList(data));
+    dispatch(uiActions.loadFinished());
+  }
+}
+
+export function loadTakeHomeRequest(id) {
+  return async (dispatch, getState) => {
+    dispatch(uiActions.loadStarted());
+    const { data, statusText } = await axios.get(`/api/takehomerequest/${id}`);
+    if (statusText !== 'OK') {
+      dispatch(Notifications.error({ title: 'Error during loading!', autoDismiss: 0, position: 'br' }));
+      dispatch(uiActions.loadFinished());
+      return;
+    }
+    dispatch(adminActions.loadTakeHomeRequest(data));
     dispatch(uiActions.loadFinished());
   }
 }
@@ -57,4 +71,27 @@ export function denyTakeHomeRequest(id, fromList = false) {
     }
     dispatch(uiActions.loadFinished());
   }
+}
+
+export function loadPets() {
+  return async (dispatch, getState) => {
+    dispatch(uiActions.loadStarted());
+    const { data, statusText } = await axios.get('/api/pet');
+    if (statusText !== 'OK') {
+      dispatch(Notifications.error({ title: 'Error during loading!', autoDismiss: 0, position: 'br' }));
+      dispatch(uiActions.loadFinished());
+      return;
+    }
+    dispatch(uiActions.loadPetsList(data));
+    dispatch(uiActions.loadFinished());
+  }
+}
+
+export function sendQr(qrCode) {
+	return async (dispatch, getState) => {
+		dispatch(uiActions.loadStarted());
+		const pet = await axios.get(`/api/pet/qr/${qrCode}`);
+		console.log({ pet })
+		dispatch(uiActions.loadFinished());
+	}
 }

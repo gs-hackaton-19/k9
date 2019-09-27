@@ -7,11 +7,30 @@ import { withStyles } from '@material-ui/core/styles'
 import { Card, CardWrapper } from 'react-swipeable-cards';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import CropFreeIcon from '@material-ui/icons/CropFree';
+import Fab from '@material-ui/core/Fab';
+import { loadPets, sendQr } from '../../thunks';
+import QrScanner from 'qr-scanner'
 
 const styles = theme => ({
   wrapper: {
     textAlign: 'center',
-    backgroundColor: '#c8b1e5',
+    margin: 'auto',
+    padding: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    backgroundColor: '#99abbe',
+  },
+  selectedCard: {
+    width: 400,
+    height: '70vh',
+  },
+  card: {
+    padding: 16,
+    pointerEvents: 'none',
   },
   redCard: {
     height: '100%',
@@ -27,19 +46,27 @@ const styles = theme => ({
   },
 })
 export class Dashboard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      pets: [
-        { id: 1, name:'Rasputin' },
-        { id: 2, name:'Long Johnson' },
-        { id: 3, name:'Phteven' },
-      ],
+      pets: [],
       leftSwipes: [],
       rightSwipes: [],
       loading: false,
+      qrResult: null,
     }
+
+    this.qrInput = React.createRef();
+  }
+
+  componentDidUpdate(prevState) {
+    if (!prevState.pets || !prevState.pets.length) this.setState({ pets: this.props.pets})
+    console.log({props: this.props, prevState});
+  }
+
+  componentDidMount() {
+    this.props.loadPets();
   }
 
   handleSwipeCycle() {
@@ -56,9 +83,9 @@ export class Dashboard extends Component {
   onSwipeLeft(petId) {
     const { pets, leftSwipes } = this.state;
 
-    const pet = pets.filter(pet => pet.id === petId)[0]
+    const pet = pets.filter(pet => pet._id === petId)[0]
 
-    this.setState({ leftSwipes: [...leftSwipes, pet], pets: pets.filter(pet => pet.id !== petId) }, () => {
+    this.setState({ leftSwipes: [...leftSwipes, pet], pets: pets.filter(pet => pet._id !== petId) }, () => {
       this.handleSwipeCycle()
     })
   }
@@ -66,11 +93,33 @@ export class Dashboard extends Component {
   onSwipeRight(petId) {
     const { pets, rightSwipes  } = this.state;
 
-    const pet = pets.filter(pet => pet.id === petId)[0]
+    const pet = pets.filter(pet => pet._id === petId)[0]
 
-    this.setState({ rightSwipes: [...rightSwipes, pet], pets: pets.filter(pet => pet.id !== petId) }, () => {
+    this.setState({ rightSwipes: [...rightSwipes, pet], pets: pets.filter(pet => pet._id !== petId) }, () => {
       this.handleSwipeCycle()
     })
+  }
+
+  openQRCamera() {
+    const node = this.qrInput.current;
+    node.click()
+  }
+
+  scanQR() {
+    const node = this.qrInput.current;
+    const reader = new FileReader();
+    reader.onload = () => {
+      node.value = "";
+      window.qrcode.callback = (res) => {
+        if(res instanceof Error) {
+          alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
+        } else {
+          this.props.sendQr(res)
+        }
+      };
+      window.qrcode.decode(reader.result);
+    };
+    reader.readAsDataURL(node.files[0]);
   }
 
   render() {
@@ -78,49 +127,65 @@ export class Dashboard extends Component {
     const { pets, rightSwipes } = this.state;
     
     return (
-      <Paper>
+      <div className={classes.wrapper}>
+        {this.state.qrResult}
+        <input style={{ display: 'none' }} type="file" accept="image/*" capture="environment" ref={this.qrInput} onChange={() => this.scanQR()}/>
         {!pets.length && rightSwipes.length === 1 ? (
-          <div>
-            You selected {rightSwipes[0].name} as your new pet!
-          </div>
+          <>
+            <Paper className={classes.selectedCard}>
+              <Typography variant="h5" component="h3">
+                You selected {rightSwipes[0].name} as your new pet!
+              </Typography>
+            </Paper>
+            <Fab color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
+              <CropFreeIcon />
+            </Fab>
+          </>
         ) : (
-          <CardWrapper>
-            {pets.map((pet, index) => {
-              let cardClass;
+          <>
+            <CardWrapper>
+              {pets.map((pet, index) => {
+                let cardClass;
 
-              if (index % 3 === 0) cardClass = classes.redCard
-              if (index % 3 === 1) cardClass = classes.greenCard
-              if (index % 3 === 2) cardClass = classes.blueCard
+                if (index % 3 === 0) cardClass = classes.redCard
+                if (index % 3 === 1) cardClass = classes.greenCard
+                if (index % 3 === 2) cardClass = classes.blueCard
 
-              return (
-                <Card 
-                  key={pet.id}
-                  onSwipeLeft={() => this.onSwipeLeft(pet.id)} 
-                  onSwipeRight={() => this.onSwipeRight(pet.id)}
-                >
-                  <div>
-                    <Typography variant="h5" component="h3">
-                      {pet.name}
-                    </Typography>
-                  </div>
-                </Card>
-              )
-            })}
-          </CardWrapper>
+                return (
+                  <Card 
+                    key={pet._id}
+                    onSwipeLeft={() => this.onSwipeLeft(pet._id)} 
+                    onSwipeRight={() => this.onSwipeRight(pet._id)}
+                  >
+                    <div className={classes.card}>
+                      <Typography variant="h5" component="h3">
+                        {pet.name}
+                      </Typography>
+                    </div>
+                  </Card>
+                )
+              })}
+            </CardWrapper>
+            <Fab color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
+              <CropFreeIcon />
+            </Fab>
+          </>
         )}
-      </Paper>
+      </div>
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
-
+    pets: state.ui.pets
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    loadPets,
+    sendQr,
   }, dispatch)
 }
 
