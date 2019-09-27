@@ -2,7 +2,8 @@ import { types } from '../actions/ui'
 
 export default function (state = {
   pets: [],
-  loading: false
+  loading: false,
+  singlePet: null,
 }, action) {
   switch (action.type) {
     case types.LOAD_STARTED:
@@ -20,6 +21,11 @@ export default function (state = {
         ...state,
         pets: action.payload || [],
       };
+    case types.LOAD_SINGLE_PET: 
+      return {
+        ...state,
+        singlePet: action.payload,
+      }
     default:
       return state
   }

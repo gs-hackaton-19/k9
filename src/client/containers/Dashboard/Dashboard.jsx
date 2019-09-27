@@ -11,6 +11,7 @@ import CropFreeIcon from '@material-ui/icons/CropFree';
 import Fab from '@material-ui/core/Fab';
 import { loadPets, sendQr } from '../../thunks';
 import QrScanner from 'qr-scanner'
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   wrapper: {
@@ -25,11 +26,18 @@ const styles = theme => ({
     backgroundColor: '#99abbe',
   },
   selectedCard: {
-    width: 400,
-    height: '70vh',
+    width: 368,
+    height: 'calc(70vh - 16px)',
+    padding: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
   },
   card: {
     padding: 16,
+    height: 'calc(100% - 32px)',
     pointerEvents: 'none',
   },
   redCard: {
@@ -44,6 +52,18 @@ const styles = theme => ({
     height: '100%',
     backgroundColor: '#6376ec',
   },
+  cardWrapper: {
+    height: '80%',
+  },
+  cta: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    height: 'calc(100% - 31px)',
+  },
+  ctaButton: {
+    pointerEvents: 'initial',
+  }
 })
 export class Dashboard extends Component {
   constructor(props) {
@@ -122,23 +142,25 @@ export class Dashboard extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, singlePet } = this.props;
     const { pets, rightSwipes } = this.state;
+
+    const myPet = singlePet || (!pets.length && rightSwipes.length === 1 ? rightSwipes[0] : null)
     
     return (
       <div className={classes.wrapper}>
         {this.state.qrResult}
         <input style={{ display: 'none' }} type="file" accept="image/*" capture="environment" ref={this.qrInput} onChange={() => this.scanQR()}/>
-        {!pets.length && rightSwipes.length === 1 ? (
+        {myPet ? (
           <>
             <Paper className={classes.selectedCard}>
               <Typography variant="h5" component="h3">
-                You selected {rightSwipes[0].name} as your new pet!
-              </Typography>
+                  You selected {myPet.name} as your new pet!
+                </Typography>
+              <Fab className={classes.ctaButton} color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
+                <CropFreeIcon />
+              </Fab>
             </Paper>
-            <Fab color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
-              <CropFreeIcon />
-            </Fab>
           </>
         ) : (
           <>
@@ -150,7 +172,10 @@ export class Dashboard extends Component {
                     onSwipeLeft={() => this.onSwipeLeft(pet._id)} 
                     onSwipeRight={() => this.onSwipeRight(pet._id)}
                   >
-                    <div className='none'>
+                    <div className={classes.card}>
+                      <Typography variant="h5" component="h3">
+                        {pet.name}
+                      </Typography>
                       <div className="image" style={{backgroundImage: `url(${pet.image})`}}></div>
                       <div className="details">
                         <Typography variant="h5" component="h3">
@@ -190,14 +215,22 @@ export class Dashboard extends Component {
                           </Typography>
                         </div>
                       </div>
+                      <div className={classes.cta}>
+                        <Button className={classes.ctaButton} variant="contained" color="secondary" onClick={() => this.onSwipeLeft(pet._id)}>
+                          Ugly
+                        </Button>
+                        <Fab className={classes.ctaButton} color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
+                          <CropFreeIcon />
+                        </Fab>
+                        <Button className={classes.ctaButton} variant="contained" color="primary" onClick={() => this.onSwipeRight(pet._id)}>
+                          Cute
+                        </Button>
+                      </div>
                     </div>
                   </Card>
                 )
               })}
             </CardWrapper>
-            <Fab color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
-              <CropFreeIcon />
-            </Fab>
           </>
         )}
       </div>
@@ -207,7 +240,8 @@ export class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    pets: state.ui.pets
+    pets: state.ui.pets,
+    singlePet: state.ui.singlePet,
   }
 }
 
