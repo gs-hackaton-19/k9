@@ -22,6 +22,7 @@ const styles = theme => ({
   root: {
     width: 'calc(100% - 32px)',
     padding: '16px',
+    minHeight: 'calc(100vh - 96px)',
     backgroundColor: theme.palette.background.paper,
   },
 });

@@ -14,6 +14,7 @@ import Header from '../Header/Header';
 const styles = theme => ({
   root: {
     width: 'calc(100% - 32px)',
+    minHeight: 'calc(100vh - 96px)',
     padding: '16px',
     backgroundColor: theme.palette.background.paper,
   },
@@ -22,9 +23,15 @@ const styles = theme => ({
   }
 });
 
-const renderStatus = () => {
-
-}
+const renderStatus = (takeHomeRequest) => {
+  if (takeHomeRequest.approved || takeHomeRequest.disapproved) {
+    return (
+      <Typography variant="h4" gutterBottom>
+        {takeHomeRequest.approved ? 'This request was approved' : 'This request was denied'}
+      </Typography>
+    );
+  }
+};
 
 class TakeHomeRequestList extends Component {
   componentDidMount() {
@@ -33,10 +40,12 @@ class TakeHomeRequestList extends Component {
 
   approve() {
     this.props.approveTakeHomeRequest(this.props.match.params.id);
+    this.props.loadTakeHomeRequest(this.props.match.params.id);
   }
 
   deny() {
     this.props.denyTakeHomeRequest(this.props.match.params.id);
+    this.props.loadTakeHomeRequest(this.props.match.params.id);
   }
 
   render() {
@@ -49,8 +58,8 @@ class TakeHomeRequestList extends Component {
             takeHomeRequest ?
               (
                 <div>
-                  <Typography variant="h2">
-                    Take home request details {}
+                  <Typography variant="h2" gutterBottom>
+                    Take home request details
                   </Typography>
                   <Typography variant="h6" gutterBottom>
                     Pet name
@@ -72,6 +81,8 @@ class TakeHomeRequestList extends Component {
                   <Typography variant="h4" gutterBottom>
                     {takeHomeRequest.requestDate}
                   </Typography>
+
+                  {renderStatus(takeHomeRequest)}
 
                   <Button variant="contained" color="primary" className={classes.approveButton} onClick={() => this.approve()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
                     Approve
