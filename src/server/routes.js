@@ -12,7 +12,8 @@ router.get('/api/pet/:id', async (req, res) => {
 });
 
 router.get('/api/pet', async (req, res) => {
-  const pets = await Pet.find();
+  const { species, breed, age, color, sex } = req.query;
+  const pets = await Pet.find({ species, breed, age, color, sex });
   return res.json(pets);
 });
 
