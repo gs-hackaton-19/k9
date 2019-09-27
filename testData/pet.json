@@ -60,7 +60,10 @@
         "image": "http://localhost:3001/public/4_cat.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 4,
-        "coordinates": [47.497913, 19.040236],
+        "location": {
+            "type": "Point",
+            "coordinates": [47.497913, 19.040236]
+        },
         "address": "Macska u., 666",
         "qrCode": "4"
     },
@@ -289,4 +292,3 @@
         "qrCode": "101"
     }
 ]
-  

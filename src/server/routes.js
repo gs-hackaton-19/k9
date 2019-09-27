@@ -6,6 +6,22 @@ const TakeHomeRequest = require('./model/TakeHomeRequest');
 
 const cageOpenerURL = 'http://192.168.43.222:3002/cage/open';
 
+router.get('/api/pet/geo', async (req, res) => {
+  const { lat, long } = req.query;
+  const pets = await Pet.find({
+    location: {
+      $near: {
+        $maxDistance: 20,
+        $geometry: {
+          type: "Point",
+          coordinates: [lat, long]
+        }
+      }
+    }
+  });
+  return res.json(pets);
+});
+
 router.get('/api/pet/:id', async (req, res) => {
   const { id } = req.params;
   const pet = await Pet.findById(id);
@@ -75,7 +91,7 @@ router.post('/api/takehomerequest/:id/approve', async (req, res) => {
   } catch (err) {
 
   }
-  
+
   res.json(request);
 });
 
