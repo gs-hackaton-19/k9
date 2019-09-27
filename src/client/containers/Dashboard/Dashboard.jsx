@@ -82,9 +82,9 @@ export class Dashboard extends Component {
   onSwipeLeft(petId) {
     const { pets, leftSwipes } = this.state;
 
-    const pet = pets.filter(pet => pet.id === petId)[0]
+    const pet = pets.filter(pet => pet._id === petId)[0]
 
-    this.setState({ leftSwipes: [...leftSwipes, pet], pets: pets.filter(pet => pet.id !== petId) }, () => {
+    this.setState({ leftSwipes: [...leftSwipes, pet], pets: pets.filter(pet => pet._id !== petId) }, () => {
       this.handleSwipeCycle()
     })
   }
@@ -92,9 +92,9 @@ export class Dashboard extends Component {
   onSwipeRight(petId) {
     const { pets, rightSwipes  } = this.state;
 
-    const pet = pets.filter(pet => pet.id === petId)[0]
+    const pet = pets.filter(pet => pet._id === petId)[0]
 
-    this.setState({ rightSwipes: [...rightSwipes, pet], pets: pets.filter(pet => pet.id !== petId) }, () => {
+    this.setState({ rightSwipes: [...rightSwipes, pet], pets: pets.filter(pet => pet._id !== petId) }, () => {
       this.handleSwipeCycle()
     })
   }
@@ -152,9 +152,9 @@ export class Dashboard extends Component {
 
                 return (
                   <Card 
-                    key={pet.id}
-                    onSwipeLeft={() => this.onSwipeLeft(pet.id)} 
-                    onSwipeRight={() => this.onSwipeRight(pet.id)}
+                    key={pet._id}
+                    onSwipeLeft={() => this.onSwipeLeft(pet._id)} 
+                    onSwipeRight={() => this.onSwipeRight(pet._id)}
                   >
                     <div className={classes.card}>
                       <Typography variant="h5" component="h3">

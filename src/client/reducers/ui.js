@@ -1,6 +1,7 @@
 import { types } from '../actions/ui'
 
 export default function (state = {
+  pets: [],
   loading: false
 }, action) {
   switch (action.type) {
