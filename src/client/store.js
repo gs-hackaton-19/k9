@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import rootReducer from './reducers'
 import ui from './actions/ui'
+
+const browserHistory = createBrowserHistory()
 
 const configureStore = (initialState = {}) => {
   // Redux Configuration
@@ -12,6 +14,9 @@ const configureStore = (initialState = {}) => {
 
   // Thunk Middleware
   middleware.push(thunk)
+
+  // Router Middleware
+  middleware.push(routerMiddleware(browserHistory))
 
   // Redux DevTools Configuration
   const actionCreators = {
@@ -33,7 +38,7 @@ const configureStore = (initialState = {}) => {
   // Create Store
   const store = createStore(rootReducer, initialState, enhancer)
 
-  const history = syncHistoryWithStore(createBrowserHistory(), store)
+  const history = syncHistoryWithStore(browserHistory, store)
 
   if (module.hot) {
     module.hot.accept('./reducers', () =>
