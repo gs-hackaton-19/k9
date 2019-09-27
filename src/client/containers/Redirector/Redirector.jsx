@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 import { push } from 'react-router-redux'
 import { withStyles } from '@material-ui/core/styles'
-import { testThunk } from '../../thunks'
 
 const styles = theme => ({
 })
