@@ -61,8 +61,7 @@ export class Dashboard extends Component {
   }
 
   componentDidUpdate(prevState) {
-    if (!prevState.pets || !prevState.pets.length) this.setState({ pets: this.props.pets})
-    console.log({props: this.props, prevState});
+    if (!prevState.pets || !prevState.pets.length) this.setState({ pets: this.props.pets});
   }
 
   componentDidMount() {
@@ -145,22 +144,52 @@ export class Dashboard extends Component {
           <>
             <CardWrapper>
               {pets.map((pet, index) => {
-                let cardClass;
-
-                if (index % 3 === 0) cardClass = classes.redCard
-                if (index % 3 === 1) cardClass = classes.greenCard
-                if (index % 3 === 2) cardClass = classes.blueCard
-
                 return (
                   <Card 
                     key={pet._id}
                     onSwipeLeft={() => this.onSwipeLeft(pet._id)} 
                     onSwipeRight={() => this.onSwipeRight(pet._id)}
                   >
-                    <div className={classes.card}>
-                      <Typography variant="h5" component="h3">
-                        {pet.name}
-                      </Typography>
+                    <div className='none'>
+                      <div className="image" style={{backgroundImage: `url(${pet.image})`}}></div>
+                      <div className="details">
+                        <Typography variant="h5" component="h3">
+                          {pet.name}
+                        </Typography>
+                        
+                        <div className="left-align">
+                          <Typography variant="body1" component="p">
+                            Species: {pet.species}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Breed: {pet.breed}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Bescription: {pet.description}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            age: {pet.age}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                          color: {pet.color}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            sex: {pet.sex}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                          behavior: {pet.behavior}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${pet.coordinates[0]},${pet.coordinates[1]}`} target="_blank">Map</a>
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                          address: {pet.address}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            sex: {pet.sex}
+                          </Typography>
+                        </div>
+                      </div>
                     </div>
                   </Card>
                 )
