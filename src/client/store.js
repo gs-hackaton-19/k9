@@ -2,11 +2,12 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { createHashHistory } from 'history'
 import { routerMiddleware, routerActions } from 'react-router-redux'
-import rootReducer from '../reducers'
+import rootReducer from './reducers'
+import ui from './actions/ui'
 
 const history = createHashHistory()
 
-const configureStore = initialState => {
+const configureStore = (initialState = {}) => {
   // Redux Configuration
   const middleware = []
   const enhancers = []
@@ -18,21 +19,10 @@ const configureStore = initialState => {
   const router = routerMiddleware(history)
   middleware.push(router)
 
-  // Socket.IO Middleware
-  // const socketIo = io(SOCKET_ADDRESS)
-  // const socketIoMiddleware = createSocketIoMiddleware(socketIo, "socket/")
-  // middleware.push(socketIoMiddleware)
-
   // Redux DevTools Configuration
   const actionCreators = {
     ...routerActions,
-    ...devices,
-    ...preferences,
-    ...settings,
-    ...stream,
-    ...tests,
     ...ui,
-    ...user
   }
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
@@ -48,7 +38,7 @@ const configureStore = initialState => {
   const enhancer = composeEnhancers(...enhancers)
 
   // Create Store
-  const store = createStore(initialState, enhancer)
+  const store = createStore(rootReducer, initialState, enhancer)
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
