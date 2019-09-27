@@ -88,10 +88,10 @@ router.post('/api/takehomerequest/:id/approve', async (req, res) => {
     { new: true });
   if (approve) try {
     await axios.get(cageOpenerURL, {
-      timeout: 5
+      timeout: 5000
     });
   } catch (err) {
-
+    console.error(err);
   }
 
   res.json(request);
