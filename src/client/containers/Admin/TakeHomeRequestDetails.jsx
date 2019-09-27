@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import compose from 'recompose/compose';
 import {connect} from 'react-redux';
-
-import { withStyles } from '@material-ui/core/styles';
-
-import {approveTakeHomeRequest, denyTakeHomeRequest, loadTakeHomeRequest} from '../../thunks';
 import {withRouter} from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+
+import {approveTakeHomeRequest, denyTakeHomeRequest, loadTakeHomeRequest} from '../../thunks';
 import Header from '../Header/Header';
 
 const styles = theme => ({

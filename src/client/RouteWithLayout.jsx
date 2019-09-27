@@ -8,7 +8,6 @@ import Notifications from 'react-notification-system-redux'
 
 const styles = theme => ({
   background: {
-    backgroundColor: '#c8b1e5',
     height: '100%',
   }
 })
@@ -36,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    
+
   }, dispatch)
 }
 

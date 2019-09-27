@@ -12,6 +12,14 @@ router.get('/api/pet/:id', async (req, res) => {
   return res.json(pet);
 });
 
+router.get('/api/pet/qr/:qrCode', async (req, res) => {
+  const { qrCode } = req.params;
+  const pet = await Pet.findOne({
+    qrCode,
+  });
+  return res.json(pet);
+});
+
 router.get('/api/pet', async (req, res) => {
   const filter = req.query;
   const pets = await Pet.find(filter);
