@@ -1,15 +1,15 @@
 // @flow
 import React from 'react'
 import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
+import { Router } from 'react-router'
 import Routes from './routes'
 
 export default function Root({ store, history }) {
   return (
     <Provider store={store}>
-			<ConnectedRouter history={history}>
+			<Router history={history}>
 					<Routes />
-			</ConnectedRouter>
+			</Router>
     </Provider>
   )
 }

@@ -8,7 +8,9 @@ import configureStore from './client/store'
 const { store, history } = configureStore({});
 
 render(
-  <Root store={store} history={history}/>,
+  <AppContainer>
+    <Root store={store} history={history}/>
+  </AppContainer>,
   document.getElementById('root')
 )
 
