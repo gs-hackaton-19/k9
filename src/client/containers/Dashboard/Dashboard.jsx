@@ -195,7 +195,7 @@ export class Dashboard extends Component {
                             Sex: {pet.sex}
                           </Typography>
                           <Typography variant="body1" component="p">
-                            <a href={`https://www.google.com/maps/search/?api=1&query=${pet.coordinates[0]},${pet.coordinates[1]}`} target="_blank">Map</a>
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${pet.location.coordinates[0]},${pet.location.coordinates[1]}`} target="_blank">Map</a>
                           </Typography>
                           <Typography variant="body1" component="p">
                             Address: {pet.address}
