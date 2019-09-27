@@ -1,5 +1,18 @@
 const mongoose = require('mongoose');
 
+const pointSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Point'],
+    default: 'Point',
+    required: true
+  },
+  coordinates: {
+    type: [Number],
+    required: true
+  }
+});
+
 const PetSchema = mongoose.Schema({
   name: String,
   species: { type: String },
@@ -12,11 +25,14 @@ const PetSchema = mongoose.Schema({
   image: { type: String, default: 'https://placekitten.com/200/300' },
   timeToDie: Date,
   cageId: Number,
-  coordinates: {
-    type: [Number], index: '2d', sparse: true
+  location: {
+    type: { type: String },
+    coordinates: []
   },
   address: String,
   qrCode: String,
 });
+
+PetSchema.index({ location: "2dsphere" });
 
 module.exports = mongoose.model('Pet', PetSchema);

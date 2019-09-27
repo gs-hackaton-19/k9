@@ -5,6 +5,22 @@ const TakeHomeRequest = require('./model/TakeHomeRequest');
 
 //const cageOpenerURL = 'https://ketrecnyito.url';
 
+router.get('/api/pet/geo', async (req, res) => {
+  const { lat, long } = req.query;
+  const pets = await Pet.find({
+    location: {
+      $near: {
+        $maxDistance: 20000,
+        $geometry: {
+          type: "Point",
+          coordinates: [47, 19]
+        }
+      }
+    }
+  });
+  return res.json(pets);
+});
+
 router.get('/api/pet/:id', async (req, res) => {
   const { id } = req.params;
   const pet = await Pet.findById(id);
@@ -14,13 +30,6 @@ router.get('/api/pet/:id', async (req, res) => {
 router.get('/api/pet', async (req, res) => {
   const filter = req.query;
   const pets = await Pet.find(filter);
-  return res.json(pets);
-});
-
-router.get('/api/pet/geo', async (req, res) => {
-  const { lat, long } = req.query;
-  const pets = await Pet.find()
-    .near('coordinates', { center: { coordinates: [10, 10], type: 'Point' }, maxDistance: 5, spherical: true });
   return res.json(pets);
 });
 
