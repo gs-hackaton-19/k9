@@ -1,6 +1,7 @@
 import React from 'react'
-import { Switch } from 'react-router'
+import { Switch, Route } from 'react-router'
 import RouteWithLayout from './RouteWithLayout'
+import Redirector from './containers/Redirector/Redirector'
 import Dashboard from './containers/Dashboard/Dashboard'
 import TakeHomeRequestList from './containers/Admin/TakeHomeRequestList';
 
@@ -8,5 +9,6 @@ export default () => (
   <Switch>
     <RouteWithLayout path="/admin" component={TakeHomeRequestList} />
     <RouteWithLayout path="/dashboard" component={Dashboard} />
+    <Route path="/" component={Redirector} />
   </Switch>
 )
