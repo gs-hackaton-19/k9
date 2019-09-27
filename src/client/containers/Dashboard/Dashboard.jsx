@@ -57,7 +57,10 @@ export class Dashboard extends Component {
       leftSwipes: [],
       rightSwipes: [],
       loading: false,
+      qrResult: null,
     }
+
+    this.qrInput = React.createRef();
   }
 
   handleSwipeCycle() {
@@ -92,15 +95,20 @@ export class Dashboard extends Component {
   }
 
   openQRCamera() {
-    const node = this.qrInput;
+    const node = this.qrInput.current;
+    node.click()
+  }
+
+  scanQR() {
+    const node = this.qrInput.current;
     const reader = new FileReader();
-    reader.onload = function() {
+    reader.onload = () => {
       node.value = "";
-      window.qrcode.callback = function(res) {
+      window.qrcode.callback = (res) => {
         if(res instanceof Error) {
           alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
         } else {
-          node.parentNode.previousElementSibling.value = res;
+          this.setState({ qrResult: res })
         }
       };
       window.qrcode.decode(reader.result);
@@ -114,7 +122,8 @@ export class Dashboard extends Component {
     
     return (
       <div className={classes.wrapper}>
-        <input type="file" accept="image/*" capture="environment" tabindex="-1" ref={this.qrInput} />
+        {this.state.qrResult}
+        <input style={{ display: 'none' }} type="file" accept="image/*" capture="environment" ref={this.qrInput} onChange={() => this.scanQR()}/>
         {!pets.length && rightSwipes.length === 1 ? (
           <>
             <Paper className={classes.selectedCard}>
@@ -169,6 +178,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    
   }, dispatch)
 }
 
