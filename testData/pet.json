@@ -8,7 +8,7 @@
         "color": "Gray",
         "sex": "Male",
         "behavior": "Retarded",
-        "image": "http://localhost:3001/public/1_cat.jpg",
+        "image": "/public/1_cat.jpg",
         "timeToDie": "2019.09.31",
         "cageId": 1,
         "location": {
@@ -30,7 +30,7 @@
         "color": "Gray",
         "sex": "Male",
         "behavior": "Peaceful",
-        "image": "http://localhost:3001/public/2_cat.jpg",
+        "image": "/public/2_cat.jpg",
         "timeToDie": "2019.11.30",
         "cageId": 2,
         "location": {
@@ -52,7 +52,7 @@
         "color": "Gray",
         "sex": "Male",
         "behavior": "Starving 24/7",
-        "image": "http://localhost:3001/public/3_cat.jpg",
+        "image": "/public/3_cat.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 3,
         "location": {
@@ -74,7 +74,7 @@
         "color": "Pinkish",
         "sex": "Male",
         "behavior": "Neutral",
-        "image": "http://localhost:3001/public/4_cat.jpg",
+        "image": "/public/4_cat.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 4,
         "location": {
@@ -96,7 +96,7 @@
         "color": "Gray",
         "sex": "Male",
         "behavior": "Passive",
-        "image": "http://localhost:3001/public/5_cat.jpg",
+        "image": "/public/5_cat.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 5,
         "location": {
@@ -118,7 +118,7 @@
         "color": "Casual pug color",
         "sex": "Female",
         "behavior": "Peaceful",
-        "image": "http://localhost:3001/public/1_dog.jpg",
+        "image": "/public/1_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 6,
         "location": {
@@ -140,7 +140,7 @@
         "color": "Brown",
         "sex": "Male",
         "behavior": "Peaceful",
-        "image": "http://localhost:3001/public/2_dog.jpg",
+        "image": "/public/2_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 7,
         "location": {
@@ -162,7 +162,7 @@
         "color": "Brown",
         "sex": "Male",
         "behavior": "Peaceful",
-        "image": "http://localhost:3001/public/3_dog.jpg",
+        "image": "/public/3_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 8,
         "location": {
@@ -184,7 +184,7 @@
         "color": "Brown",
         "sex": "Male",
         "behavior": "Peaceful",
-        "image": "http://localhost:3001/public/birdy.jpg",
+        "image": "/public/birdy.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 9,
         "location": {
@@ -206,7 +206,7 @@
         "color": "Brown",
         "sex": "Male",
         "behavior": "Peaceful",
-        "image": "http://localhost:3001/public/donkey.jpg",
+        "image": "/public/donkey.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 10,
         "location": {
@@ -228,7 +228,7 @@
         "color": "Green",
         "sex": "Male",
         "behavior": "Peaceful",
-        "image": "http://localhost:3001/public/stickhopper.jpg",
+        "image": "/public/stickhopper.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 11,
         "location": {
@@ -250,7 +250,7 @@
         "color": "Grey, white",
         "sex": "Male",
         "behavior": "Friendly",
-        "image": "http://localhost:3001/public/shaggy-dog.jpg",
+        "image": "/public/shaggy-dog.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 12,
         "location": {
@@ -272,7 +272,7 @@
         "color": "Grey, white",
         "sex": "Male",
         "behavior": "Fighter",
-        "image": "http://localhost:3001/public/Cat.jpg",
+        "image": "/public/Cat.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 13,
         "location": {
@@ -294,7 +294,7 @@
         "color": "Brown",
         "sex": "Male",
         "behavior": "Grumpy",
-        "image": "http://localhost:3001/public/Dog1.jpg",
+        "image": "/public/Dog1.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 14,
         "location": {
@@ -316,7 +316,7 @@
         "color": "Black, White",
         "sex": "Female",
         "behavior": "Mean",
-        "image": "http://localhost:3001/public/Chihuahua-On-White-03.jpg",
+        "image": "/public/Chihuahua-On-White-03.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 15,
         "location": {
@@ -338,7 +338,7 @@
         "color": "Brown",
         "sex": "Female",
         "behavior": "Calm",
-        "image": "http://localhost:3001/public/Chow%20Chow.jpg",
+        "image": "/public/Chow%20Chow.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 16,
         "location": {
@@ -360,7 +360,7 @@
         "color": "Hairless",
         "sex": "Female",
         "behavior": "Calm",
-        "image": "http://localhost:3001/public/sphynx-cat-breed-info.jpg",
+        "image": "/public/sphynx-cat-breed-info.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 17,
         "location": {
@@ -382,7 +382,7 @@
         "color": "Colored",
         "sex": "Male",
         "behavior": "Silent",
-        "image": "http://localhost:3001/public/plush.jpg",
+        "image": "/public/plush.jpg",
         "timeToDie": "2122.09.27",
         "cageId": 18,
         "location": {
