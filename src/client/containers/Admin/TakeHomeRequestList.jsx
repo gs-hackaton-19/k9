@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import {bindActionCreators} from 'redux';
 import compose from 'recompose/compose';
 import {connect} from 'react-redux';
-import {loadTakeHomeRequests} from '../../thunks';
+
+import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import DoneIcon from '@material-ui/icons/Done';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import { loadTakeHomeRequests, approveTakeHomeRequest, denyTakeHomeRequest } from '../../thunks';
 
 const styles = theme => ({
   root: {
@@ -26,37 +30,46 @@ function ListItemLink(props) {
 }
 
 class TakeHomeRequestList extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadTakeHomeRequests();
   }
 
+  approve(requestId) {
+    console.log('approve', requestId);
+    this.props.approveTakeHomeRequest(requestId);
+  }
+
+  deny(requestId) {
+    console.log('deny', requestId);
+    this.props.denyTakeHomeRequest(requestId);
+  }
+
   render() {
-    const {classes} = this.props;
+    const { classes, takeHomeRequests } = this.props;
 
     return (
       <div className={classes.root}>
         <List component="nav">
-          <ListItem button>
-            <ListItemIcon>
-              <InboxIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Inbox" secondary="Username"/>
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <DraftsIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Drafts"/>
-          </ListItem>
-        </List>
-        <Divider/>
-        <List component="nav">
-          <ListItem button>
-            <ListItemText primary="Trash"/>
-          </ListItem>
-          <ListItemLink href="#simple-list">
-            <ListItemText primary="Spam"/>
-          </ListItemLink>
+          {takeHomeRequests.map(({ _id, pet }) => (
+            <ListItem key={_id}>
+              <ListItemAvatar>
+                <Avatar src={pet.image} />
+              </ListItemAvatar>
+
+              <ListItemLink href="#simple-list">
+                <ListItemText primary={pet.name} secondary="User: Alice"/>
+              </ListItemLink>
+
+              <ListItemSecondaryAction>
+                <IconButton aria-label="Approve" onClick={() => this.approve(_id)}>
+                  <DoneIcon />
+                </IconButton>
+                <IconButton aria-label="Deny"  onClick={() => this.deny(_id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
         </List>
       </div>
     );
@@ -69,13 +82,15 @@ TakeHomeRequestList.propTypes = {
 
 function mapStateToProps(state) {
   return {
-
+    takeHomeRequests: state.admin.takeHomeRequests,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     loadTakeHomeRequests,
+    approveTakeHomeRequest,
+    denyTakeHomeRequest,
   }, dispatch)
 }
 

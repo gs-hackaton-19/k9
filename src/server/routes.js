@@ -50,7 +50,7 @@ router.post('/api/takehomerequest/:id/approve', async (req, res) => {
   const { id: _id } = req.params;
   const approve = req.body.approve === 'false' ? false : true;
   const request = await TakeHomeRequest.findOneAndUpdate({ _id },
-    { approved: approve, disapprove: !approve },
+    { approved: approve, disapproved: !approve },
     {new: true});
   //await axios.get(cageOpenerURL);
   res.json(request);
