@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import {approveTakeHomeRequest, denyTakeHomeRequest, loadTakeHomeRequest} from '../../thunks';
 import Header from '../Header/Header';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
@@ -20,6 +21,13 @@ const styles = theme => ({
   },
   button: {
     marginRight: '16px',
+  },
+  details: {
+    maxWidth: 'calc(50% - 128px)',
+  },
+  image: {
+    maxWidth: '800px',
+    maxHeight: 'calc(100vh - 128px)',
   }
 });
 
@@ -57,43 +65,120 @@ class TakeHomeRequestList extends Component {
           {
             takeHomeRequest ?
               (
-                <div>
-                  <Typography variant="h2" gutterBottom>
-                    Take home request details
-                  </Typography>
-                  <Typography variant="h6" gutterBottom>
-                    Pet name
-                  </Typography>
-                  <Typography variant="h4" gutterBottom>
-                    {takeHomeRequest.pet.name}
-                  </Typography>
+                <Grid container justify="center" spacing={4}>
+                  <Grid item className={classes.details}>
+                    <div>
+                      <Typography variant="h3" gutterBottom>
+                        Take home request details
+                      </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        Pet name
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.name}
+                      </Typography>
 
-                  <Typography variant="h6" gutterBottom>
-                    User
-                  </Typography>
-                  <Typography variant="h4" gutterBottom>
-                    Alice
-                  </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        Description
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.description}
+                      </Typography>
 
-                  <Typography variant="h6" gutterBottom>
-                    Request date
-                  </Typography>
-                  <Typography variant="h4" gutterBottom>
-                    {takeHomeRequest.requestDate}
-                  </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        User
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        Alice
+                      </Typography>
 
-                  {renderStatus(takeHomeRequest)}
+                      <Typography variant="body2" gutterBottom>
+                        Cage
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.cageId}
+                      </Typography>
 
-                  <Button variant="contained" color="primary" className={classes.button} onClick={() => this.approve()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
-                    Approve
-                  </Button>
-                  <Button variant="contained" color="secondary" className={classes.button} onClick={() => this.deny()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
-                    Deny
-                  </Button>
-                  <Button onClick={history.goBack}>
-                    Back
-                  </Button>
-                </div>
+                      <Typography variant="body2" gutterBottom>
+                        Species
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.species}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        Breed
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.breed}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        Address
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.address}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        Age
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.age}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        Behavior
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.behavior}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        Sex
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.sex}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        Color
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.color}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        QR code
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.pet.qrCode}
+                      </Typography>
+
+                      <Typography variant="body2" gutterBottom>
+                        Request date
+                      </Typography>
+                      <Typography variant="h6" gutterBottom>
+                        {takeHomeRequest.requestDate}
+                      </Typography>
+
+                      {renderStatus(takeHomeRequest)}
+
+                      <Button variant="contained" color="primary" className={classes.button} onClick={() => this.approve()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
+                        Approve
+                      </Button>
+                      <Button variant="contained" color="secondary" className={classes.button} onClick={() => this.deny()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
+                        Deny
+                      </Button>
+                      <Button onClick={history.goBack}>
+                        Back
+                      </Button>
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <img src={takeHomeRequest.pet.image} className={classes.image}/>
+                  </Grid>
+                </Grid>
               ):
               (
                 <div>Not Found!</div>
@@ -128,4 +213,3 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
 )(TakeHomeRequestList)
-
