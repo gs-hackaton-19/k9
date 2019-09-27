@@ -72,3 +72,17 @@ export function denyTakeHomeRequest(id, fromList = false) {
     dispatch(uiActions.loadFinished());
   }
 }
+
+export function loadPets() {
+  return async (dispatch, getState) => {
+    dispatch(uiActions.loadStarted());
+    const { data, statusText } = await axios.get('/api/pet');
+    if (statusText !== 'OK') {
+      dispatch(Notifications.error({ title: 'Error during loading!', autoDismiss: 0, position: 'br' }));
+      dispatch(uiActions.loadFinished());
+      return;
+    }
+    dispatch(uiActions.loadPetsList(data));
+    dispatch(uiActions.loadFinished());
+  }
+}
