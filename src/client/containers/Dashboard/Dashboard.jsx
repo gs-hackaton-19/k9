@@ -58,7 +58,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    height: 'calc(100% - 31px)',
+    height: 'calc(100% - 477px)',
   },
   ctaButton: {
     pointerEvents: 'initial',
@@ -186,20 +186,13 @@ export class Dashboard extends Component {
                             Breed: {pet.breed}
                           </Typography>
                           <Typography variant="body1" component="p">
-
                             Description: {pet.description}
                           </Typography>
                           <Typography variant="body1" component="p">
                             Age: {pet.age}
                           </Typography>
                           <Typography variant="body1" component="p">
-                            Color: {pet.color}
-                          </Typography>
-                          <Typography variant="body1" component="p">
                             Sex: {pet.sex}
-                          </Typography>
-                          <Typography variant="body1" component="p">
-                            Behavior: {pet.behavior}
                           </Typography>
                           <Typography variant="body1" component="p">
                             <a href={`https://www.google.com/maps/search/?api=1&query=${pet.coordinates[0]},${pet.coordinates[1]}`} target="_blank">Map</a>
