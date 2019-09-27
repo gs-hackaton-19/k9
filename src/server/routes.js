@@ -10,10 +10,10 @@ router.get('/api/pet/geo', async (req, res) => {
   const pets = await Pet.find({
     location: {
       $near: {
-        $maxDistance: 20000,
+        $maxDistance: 20,
         $geometry: {
           type: "Point",
-          coordinates: [47, 19]
+          coordinates: [lat, long]
         }
       }
     }
