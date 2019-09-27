@@ -15,6 +15,7 @@ app.use('/', router);
 
 app.use(express.static('dist'));
 app.use('/assets', express.static('assets'));
+app.use('/public', express.static('public'));
 
 app.use((err, req, res, next) => {
   console.error(err);
