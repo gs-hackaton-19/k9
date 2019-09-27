@@ -16,6 +16,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { loadTakeHomeRequests, approveTakeHomeRequest, denyTakeHomeRequest } from '../../thunks';
+import Header from '../Header/Header';
 
 const styles = theme => ({
   root: {
@@ -46,30 +47,32 @@ class TakeHomeRequestList extends Component {
     const { classes, takeHomeRequests } = this.props;
 
     return (
-      <div className={classes.root}>
-        <List component="nav">
-          {takeHomeRequests.map(({ _id, pet }) => (
-            <ListItem key={_id}>
-              <ListItemAvatar>
-                <Avatar src={pet.image} />
-              </ListItemAvatar>
+      <Header title="Take home requests">
+        <div className={classes.root}>
+          <List component="nav">
+            {takeHomeRequests.map(({ _id, pet }) => (
+              <ListItem key={_id}>
+                <ListItemAvatar>
+                  <Avatar src={pet.image} />
+                </ListItemAvatar>
 
-              <ListItemLink href="#simple-list">
-                <ListItemText primary={pet.name} secondary="User: Alice"/>
-              </ListItemLink>
+                <ListItemLink href="#simple-list">
+                  <ListItemText primary={pet.name} secondary="User: Alice"/>
+                </ListItemLink>
 
-              <ListItemSecondaryAction>
-                <IconButton aria-label="Approve" onClick={() => this.approve(_id)}>
-                  <DoneIcon />
-                </IconButton>
-                <IconButton aria-label="Deny"  onClick={() => this.deny(_id)}>
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-        </List>
-      </div>
+                <ListItemSecondaryAction>
+                  <IconButton aria-label="Approve" onClick={() => this.approve(_id)}>
+                    <DoneIcon />
+                  </IconButton>
+                  <IconButton aria-label="Deny"  onClick={() => this.deny(_id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </Header>
     );
   }
 }
