@@ -8,7 +8,12 @@ const PetSchema = mongoose.Schema({
   age: Number,
   image: {type: String, default: 'https://placekitten.com/200/300'},
   timeToDie: Date,
-  cageId: Number
+  cageId: Number,
+  coordinates: {
+    type: [Number]
+  },
+  address: String,
+  qrCode: String,
 });
 
 module.exports = mongoose.model('Pet', PetSchema);
