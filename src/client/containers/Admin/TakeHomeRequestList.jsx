@@ -20,7 +20,8 @@ import Header from '../Header/Header';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: 'calc(100% - 32px)',
+    padding: '16px',
     backgroundColor: theme.palette.background.paper,
   },
 });

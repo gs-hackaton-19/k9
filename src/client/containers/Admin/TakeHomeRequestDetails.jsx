@@ -10,10 +10,12 @@ import {approveTakeHomeRequest, denyTakeHomeRequest, loadTakeHomeRequest} from '
 import {withRouter} from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Header from '../Header/Header';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: 'calc(100% - 32px)',
+    padding: '16px',
     backgroundColor: theme.palette.background.paper,
   },
   approveButton: {
@@ -42,48 +44,50 @@ class TakeHomeRequestList extends Component {
     const { classes, takeHomeRequest } = this.props;
 
     return (
-      <div className={classes.root}>
-        {
-          takeHomeRequest ?
-            (
-              <div>
-                <Typography variant="h2">
-                  Take home request details {}
-                </Typography>
-                <Typography variant="h6" gutterBottom>
-                  Pet name
-                </Typography>
-                <Typography variant="h4" gutterBottom>
-                  {takeHomeRequest.pet.name}
-                </Typography>
+      <Header title="Take home request details">
+        <div className={classes.root}>
+          {
+            takeHomeRequest ?
+              (
+                <div>
+                  <Typography variant="h2">
+                    Take home request details {}
+                  </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    Pet name
+                  </Typography>
+                  <Typography variant="h4" gutterBottom>
+                    {takeHomeRequest.pet.name}
+                  </Typography>
 
-                <Typography variant="h6" gutterBottom>
-                  User
-                </Typography>
-                <Typography variant="h4" gutterBottom>
-                  Alice
-                </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    User
+                  </Typography>
+                  <Typography variant="h4" gutterBottom>
+                    Alice
+                  </Typography>
 
-                <Typography variant="h6" gutterBottom>
-                  Request date
-                </Typography>
-                <Typography variant="h4" gutterBottom>
-                  {takeHomeRequest.requestDate}
-                </Typography>
+                  <Typography variant="h6" gutterBottom>
+                    Request date
+                  </Typography>
+                  <Typography variant="h4" gutterBottom>
+                    {takeHomeRequest.requestDate}
+                  </Typography>
 
-                <Button variant="contained" color="primary" className={classes.approveButton} onClick={() => this.approve()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
-                  Approve
-                </Button>
-                <Button variant="contained" color="secondary" onClick={() => this.deny()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
-                  Deny
-                </Button>
-              </div>
-            ):
-            (
-              <div>Not Found!</div>
-            )
-        }
-      </div>
+                  <Button variant="contained" color="primary" className={classes.approveButton} onClick={() => this.approve()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
+                    Approve
+                  </Button>
+                  <Button variant="contained" color="secondary" onClick={() => this.deny()} disabled={takeHomeRequest.approved || takeHomeRequest.disapproved}>
+                    Deny
+                  </Button>
+                </div>
+              ):
+              (
+                <div>Not Found!</div>
+              )
+          }
+        </div>
+      </Header>
     );
   }
 }
