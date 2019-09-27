@@ -68,5 +68,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 ```shell script
-docker run -p 127.0.0.1:27017:27017 mongo:latest
+docker run -d -p 127.0.0.1:27017:27017 mongo:latest
 ```
