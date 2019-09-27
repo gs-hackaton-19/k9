@@ -1,8 +1,8 @@
 import React from 'react'
 import { Switch } from 'react-router'
-import App from './containers/App'
-import RouteWithLayout from './containers/RouteWithLayout'
-import Dashboard from './containers/Dashboard'
+import App from './App'
+import RouteWithLayout from './RouteWithLayout'
+import Dashboard from './containers/Dashboard/Dashboard'
 
 export default () => (
   <App>

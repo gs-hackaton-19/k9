@@ -5,8 +5,6 @@ import { routerMiddleware, routerActions } from 'react-router-redux'
 import rootReducer from './reducers'
 import ui from './actions/ui'
 
-const history = createHashHistory()
-
 const configureStore = (initialState = {}) => {
   // Redux Configuration
   const middleware = []
@@ -16,6 +14,7 @@ const configureStore = (initialState = {}) => {
   middleware.push(thunk)
 
   // Router Middleware
+  const history = createHashHistory()
   const router = routerMiddleware(history)
   middleware.push(router)
 
@@ -41,12 +40,12 @@ const configureStore = (initialState = {}) => {
   const store = createStore(rootReducer, initialState, enhancer)
 
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers'))
+    module.hot.accept('./reducers', () =>
+      store.replaceReducer(require('./reducers'))
     )
   }
 
-  return store
+  return { store, history }
 }
 
 export default configureStore

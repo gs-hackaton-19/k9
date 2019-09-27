@@ -1,23 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import './index.css';
 import Root from './client/Root';
 import * as serviceWorker from './client/serviceWorker';
-import configureStore from '../src/client/store'
+import configureStore from './client/store'
 
-const store = configureStore({});
+const { store, history } = configureStore({});
 
 render(
-  <AppContainer>
-    <Root store={store}/>
-  </AppContainer>,
+  <Root store={store} history={history}/>,
   document.getElementById('root')
 )
 
 if (module.hot) {
-  module.hot.accept('./containers/Root', () => {
-    const NextRoot = require('./containers/Root')
+  module.hot.accept('./client/Root', () => {
+    const NextRoot = require('./client/Root')
     render(
       <AppContainer>
         <NextRoot store={store} />
