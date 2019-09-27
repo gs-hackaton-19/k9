@@ -1,4 +1,3 @@
-
 [
     {
         "name": "Fluffy",
@@ -12,7 +11,13 @@
         "image": "http://localhost:3001/public/1_cat.jpg",
         "timeToDie": "2019.09.31",
         "cageId": 1,
-        "coordinates": [47.497913, 19.040236],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.497913,
+                19.040236
+            ]
+        },
         "address": "Macska u., 420",
         "qrCode": "1"
     },
@@ -28,7 +33,13 @@
         "image": "http://localhost:3001/public/2_cat.jpg",
         "timeToDie": "2019.11.30",
         "cageId": 2,
-        "coordinates": [47.411113, 19.140236],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.411113,
+                19.140236
+            ]
+        },
         "address": "Babits u., 46",
         "qrCode": "2"
     },
@@ -44,7 +55,13 @@
         "image": "http://localhost:3001/public/3_cat.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 3,
-        "coordinates": [47.494413, 19.088236],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.494413,
+                19.088236
+            ]
+        },
         "address": "Macska u., 33",
         "qrCode": "3"
     },
@@ -62,7 +79,10 @@
         "cageId": 4,
         "location": {
             "type": "Point",
-            "coordinates": [47.497913, 19.040236]
+            "coordinates": [
+                47.497913,
+                19.040236
+            ]
         },
         "address": "Macska u., 666",
         "qrCode": "4"
@@ -79,7 +99,13 @@
         "image": "http://localhost:3001/public/5_cat.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 5,
-        "coordinates": [47.497223, 19.040211],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.497223,
+                19.040211
+            ]
+        },
         "address": "Kolompár út, 11",
         "qrCode": "5"
     },
@@ -95,7 +121,13 @@
         "image": "http://localhost:3001/public/1_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 6,
-        "coordinates": [47.957913, 19.075236],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.957913,
+                19.075236
+            ]
+        },
         "address": "Petőfi u., 41",
         "qrCode": "6"
     },
@@ -111,7 +143,13 @@
         "image": "http://localhost:3001/public/2_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 7,
-        "coordinates": [47.491313, 19.040131],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.491313,
+                19.040131
+            ]
+        },
         "address": "Raitiovaunu út., 18",
         "qrCode": "7"
     },
@@ -127,7 +165,13 @@
         "image": "http://localhost:3001/public/3_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 8,
-        "coordinates": [47.107913, 19.000236],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.107913,
+                19.000236
+            ]
+        },
         "address": "Bocskor u., 61",
         "qrCode": "8"
     },
@@ -143,7 +187,13 @@
         "image": "http://localhost:3001/public/birdy.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 9,
-        "coordinates": [47.437923, 19.440336],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.437923,
+                19.440336
+            ]
+        },
         "address": "Csuka u., 6",
         "qrCode": "9"
     },
@@ -159,7 +209,13 @@
         "image": "http://localhost:3001/public/donkey.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 10,
-        "coordinates": [47.100913, 19.048836],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.100913,
+                19.048836
+            ]
+        },
         "address": "Kakastaréjpörkölt út, 92",
         "qrCode": "10"
     },
@@ -175,7 +231,13 @@
         "image": "http://localhost:3001/public/stickhopper.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 11,
-        "coordinates": [47.497913, 19.040236],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.497913,
+                19.040236
+            ]
+        },
         "address": "Macska u., 666",
         "qrCode": "11"
     },
@@ -191,7 +253,13 @@
         "image": "http://localhost:3001/public/shaggy-dog.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 12,
-        "coordinates": [47.535637, 19.026678],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.535637,
+                19.026678
+            ]
+        },
         "address": "Kolostor Út 28",
         "qrCode": "12"
     },
@@ -207,7 +275,13 @@
         "image": "http://localhost:3001/public/Cat.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 13,
-        "coordinates": [47.514411, 19.006519],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.514411,
+                19.006519
+            ]
+        },
         "address": "Pasarét",
         "qrCode": "13"
     },
@@ -223,7 +297,13 @@
         "image": "http://localhost:3001/public/Dog1.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 14,
-        "coordinates": [47.517024, 18.995361],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.517024,
+                18.995361
+            ]
+        },
         "address": "Budapest XII kerület",
         "qrCode": "14"
     },
@@ -239,7 +319,13 @@
         "image": "http://localhost:3001/public/Chihuahua-On-White-03.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 15,
-        "coordinates": [47.415707, 19.024063],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.415707,
+                19.024063
+            ]
+        },
         "address": "Budapest XXII kerület",
         "qrCode": "15"
     },
@@ -255,7 +341,13 @@
         "image": "http://localhost:3001/public/Chow%20Chow.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 16,
-        "coordinates": [47.401760, 19.180491],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.401760,
+                19.180491
+            ]
+        },
         "address": "Budapest XVII kerület",
         "qrCode": "16"
     },
@@ -271,7 +363,13 @@
         "image": "http://localhost:3001/public/sphynx-cat-breed-info.jpg",
         "timeToDie": "2019.09.27",
         "cageId": 17,
-        "coordinates": [47.442030, 19.311798],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.442030,
+                19.311798
+            ]
+        },
         "address": "Ecser",
         "qrCode": "17"
     },
@@ -287,7 +385,13 @@
         "image": "http://localhost:3001/public/plush.jpg",
         "timeToDie": "2122.09.27",
         "cageId": 18,
-        "coordinates": [47.422030, 19.311798],
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                47.422030,
+                19.311798
+            ]
+        },
         "address": "Toy shop",
         "qrCode": "101"
     }
