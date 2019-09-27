@@ -35,7 +35,6 @@ const styles = theme => ({
 
   },
   card: {
-    padding: 16,
     height: 'calc(100% - 32px)',
     pointerEvents: 'none',
   },
@@ -58,7 +57,8 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    height: 'calc(100% - 477px)',
+    padding: 16,
+    height: 'calc(20% - 32px)',
   },
   ctaButton: {
     pointerEvents: 'initial',
@@ -184,9 +184,6 @@ export class Dashboard extends Component {
                           </Typography>
                           <Typography variant="body1" component="p">
                             Breed: {pet.breed}
-                          </Typography>
-                          <Typography variant="body1" component="p">
-                            Description: {pet.description}
                           </Typography>
                           <Typography variant="body1" component="p">
                             Age: {pet.age}
