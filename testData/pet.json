@@ -76,7 +76,7 @@
         "image": "http://localhost:3001/public/5_cat.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 5,
-        "coordinates": [47.497913, 19.040236],
+        "coordinates": [47.497223, 19.040211],
         "address": "Kolompár út, 11",
         "qrCode": "5"
     },
@@ -92,7 +92,7 @@
         "image": "http://localhost:3001/public/1_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 6,
-        "coordinates": [47.497913, 19.040236],
+        "coordinates": [47.957913, 19.075236],
         "address": "Petőfi u., 41",
         "qrCode": "6"
     },
@@ -108,7 +108,7 @@
         "image": "http://localhost:3001/public/2_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 7,
-        "coordinates": [47.497913, 19.040236],
+        "coordinates": [47.491313, 19.040131],
         "address": "Raitiovaunu út., 18",
         "qrCode": "7"
     },
@@ -124,7 +124,7 @@
         "image": "http://localhost:3001/public/3_dog.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 8,
-        "coordinates": [47.497913, 19.040236],
+        "coordinates": [47.107913, 19.000236],
         "address": "Bocskor u., 61",
         "qrCode": "8"
     },
@@ -140,7 +140,7 @@
         "image": "http://localhost:3001/public/birdy.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 9,
-        "coordinates": [47.497913, 19.040236],
+        "coordinates": [47.437923, 19.440336],
         "address": "Csuka u., 6",
         "qrCode": "9"
     },
@@ -156,7 +156,7 @@
         "image": "http://localhost:3001/public/donkey.jpg",
         "timeToDie": "2019.09.30",
         "cageId": 10,
-        "coordinates": [47.497913, 19.040236],
+        "coordinates": [47.100913, 19.048836],
         "address": "Kakastaréjpörkölt út, 92",
         "qrCode": "10"
     },
