@@ -14,6 +14,11 @@ export default function (state = {
         ...state,
         loading: false
       }
+    case types.LOAD_PETS_LIST_FINISHED:
+      return {
+        ...state,
+        pets: action.payload || [],
+      };
     default:
       return state
   }

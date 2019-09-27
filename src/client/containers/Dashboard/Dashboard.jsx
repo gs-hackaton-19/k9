@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import Fab from '@material-ui/core/Fab';
-import QrScanner from 'qr-scanner'
+import { loadPets } from '../../thunks';
 
 const styles = theme => ({
   wrapper: {
@@ -45,15 +45,11 @@ const styles = theme => ({
   },
 })
 export class Dashboard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      pets: [
-        { id: 1, name:'Rasputin' },
-        { id: 2, name:'Long Johnson' },
-        { id: 3, name:'Phteven' },
-      ],
+      pets: [],
       leftSwipes: [],
       rightSwipes: [],
       loading: false,
@@ -61,6 +57,15 @@ export class Dashboard extends Component {
     }
 
     this.qrInput = React.createRef();
+  }
+
+  componentDidUpdate(prevState) {
+    if (!prevState.pets || !prevState.pets.length) this.setState({ pets: this.props.pets})
+    console.log({props: this.props, prevState});
+  }
+
+  componentDidMount() {
+    this.props.loadPets();
   }
 
   handleSwipeCycle() {
@@ -172,13 +177,13 @@ export class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-
+    pets: state.ui.pets
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    
+    loadPets,
   }, dispatch)
 }
 
