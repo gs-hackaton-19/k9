@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import CropFreeIcon from '@material-ui/icons/CropFree';
 import Fab from '@material-ui/core/Fab';
 import { loadPets, sendQr } from '../../thunks';
-import QrScanner from 'qr-scanner'
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   wrapper: {
@@ -25,11 +25,18 @@ const styles = theme => ({
     backgroundColor: '#99abbe',
   },
   selectedCard: {
-    width: 400,
-    height: '70vh',
+    width: 368,
+    height: 'calc(70vh - 16px)',
+    padding: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
   },
   card: {
     padding: 16,
+    height: 'calc(100% - 32px)',
     pointerEvents: 'none',
   },
   redCard: {
@@ -44,6 +51,18 @@ const styles = theme => ({
     height: '100%',
     backgroundColor: '#6376ec',
   },
+  cardWrapper: {
+    height: '80%',
+  },
+  cta: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    height: 'calc(100% - 31px)',
+  },
+  ctaButton: {
+    pointerEvents: 'initial',
+  }
 })
 export class Dashboard extends Component {
   constructor(props) {
@@ -61,8 +80,7 @@ export class Dashboard extends Component {
   }
 
   componentDidUpdate(prevState) {
-    if (!prevState.pets || !prevState.pets.length) this.setState({ pets: this.props.pets})
-    console.log({props: this.props, prevState});
+    if (!prevState.pets || !prevState.pets.length) this.setState({ pets: this.props.pets});
   }
 
   componentDidMount() {
@@ -123,34 +141,30 @@ export class Dashboard extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, singlePet } = this.props;
     const { pets, rightSwipes } = this.state;
+
+    const myPet = singlePet || (!pets.length && rightSwipes.length === 1 ? rightSwipes[0] : null)
     
     return (
       <div className={classes.wrapper}>
         {this.state.qrResult}
         <input style={{ display: 'none' }} type="file" accept="image/*" capture="environment" ref={this.qrInput} onChange={() => this.scanQR()}/>
-        {!pets.length && rightSwipes.length === 1 ? (
+        {myPet ? (
           <>
             <Paper className={classes.selectedCard}>
               <Typography variant="h5" component="h3">
-                You selected {rightSwipes[0].name} as your new pet!
-              </Typography>
+                  You selected {myPet.name} as your new pet!
+                </Typography>
+              <Fab className={classes.ctaButton} color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
+                <CropFreeIcon />
+              </Fab>
             </Paper>
-            <Fab color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
-              <CropFreeIcon />
-            </Fab>
           </>
         ) : (
           <>
             <CardWrapper>
               {pets.map((pet, index) => {
-                let cardClass;
-
-                if (index % 3 === 0) cardClass = classes.redCard
-                if (index % 3 === 1) cardClass = classes.greenCard
-                if (index % 3 === 2) cardClass = classes.blueCard
-
                 return (
                   <Card 
                     key={pet._id}
@@ -158,17 +172,62 @@ export class Dashboard extends Component {
                     onSwipeRight={() => this.onSwipeRight(pet._id)}
                   >
                     <div className={classes.card}>
-                      <Typography variant="h5" component="h3">
-                        {pet.name}
-                      </Typography>
+                      <div className="image" style={{backgroundImage: `url(${pet.image})`}}></div>
+                      <div className="details">
+                        <Typography variant="h5" component="h3">
+                          {pet.name}
+                        </Typography>
+                        <div className="left-align">
+                          <Typography variant="body1" component="p">
+                            <div></div>
+                            Species: {pet.species}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Breed: {pet.breed}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+
+                            Description: {pet.description}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Age: {pet.age}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Color: {pet.color}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Sex: {pet.sex}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Behavior: {pet.behavior}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${pet.coordinates[0]},${pet.coordinates[1]}`} target="_blank">Map</a>
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Address: {pet.address}
+                          </Typography>
+                          <Typography variant="body1" component="p">
+                            Sex: {pet.sex}
+                          </Typography>
+                        </div>
+                      </div>
+                      <div className={classes.cta}>
+                        <Button className={classes.ctaButton} variant="contained" color="secondary" onClick={() => this.onSwipeLeft(pet._id)}>
+                          Ugly
+                        </Button>
+                        <Fab className={classes.ctaButton} color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
+                          <CropFreeIcon />
+                        </Fab>
+                        <Button className={classes.ctaButton} variant="contained" color="primary" onClick={() => this.onSwipeRight(pet._id)}>
+                          Cute
+                        </Button>
+                      </div>
                     </div>
                   </Card>
                 )
               })}
             </CardWrapper>
-            <Fab color="primary" aria-label="QR" onClick={() => this.openQRCamera()}>
-              <CropFreeIcon />
-            </Fab>
           </>
         )}
       </div>
@@ -178,7 +237,8 @@ export class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    pets: state.ui.pets
+    pets: state.ui.pets,
+    singlePet: state.ui.singlePet,
   }
 }
 
