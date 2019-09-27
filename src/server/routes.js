@@ -46,6 +46,15 @@ router.get('/api/takehomerequest', async (req, res) => {
   res.json(requests);
 });
 
+router.get('/api/takehomerequest/:id', async (req, res) => {
+  const { id } = req.params;
+  const requests = await TakeHomeRequest
+    .findById(id)
+    .populate('pet')
+    .lean();
+  res.json(requests);
+});
+
 router.post('/api/takehomerequest/:id/approve', async (req, res) => {
   const { id: _id } = req.params;
   const approve = req.body.approve === 'false' ? false : true;

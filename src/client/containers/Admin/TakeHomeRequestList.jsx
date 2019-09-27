@@ -20,7 +20,6 @@ import { loadTakeHomeRequests, approveTakeHomeRequest, denyTakeHomeRequest } fro
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
 });
@@ -54,7 +53,7 @@ class TakeHomeRequestList extends Component {
                 <Avatar src={pet.image} />
               </ListItemAvatar>
 
-              <ListItemLink href="#simple-list">
+              <ListItemLink href={`/admin/takeHome/${_id}`}>
                 <ListItemText primary={pet.name} secondary="User: Alice"/>
               </ListItemLink>
 

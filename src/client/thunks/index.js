@@ -20,7 +20,21 @@ export function loadTakeHomeRequests() {
       dispatch(uiActions.loadFinished());
       return;
     }
-    dispatch(adminActions.loadFinished(data));
+    dispatch(adminActions.loadTakeHomeRequestList(data));
+    dispatch(uiActions.loadFinished());
+  }
+}
+
+export function loadTakeHomeRequest(id) {
+  return async (dispatch, getState) => {
+    dispatch(uiActions.loadStarted());
+    const { data, statusText } = await axios.get(`/api/takehomerequest/${id}`);
+    if (statusText !== 'OK') {
+      dispatch(Notifications.error({ title: 'Error during loading!', autoDismiss: 0, position: 'br' }));
+      dispatch(uiActions.loadFinished());
+      return;
+    }
+    dispatch(adminActions.loadTakeHomeRequest(data));
     dispatch(uiActions.loadFinished());
   }
 }
