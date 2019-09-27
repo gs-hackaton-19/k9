@@ -35,13 +35,11 @@ class TakeHomeRequestList extends Component {
   }
 
   approve(requestId) {
-    console.log('approve', requestId);
-    this.props.approveTakeHomeRequest(requestId);
+    this.props.approveTakeHomeRequest(requestId, true);
   }
 
   deny(requestId) {
-    console.log('deny', requestId);
-    this.props.denyTakeHomeRequest(requestId);
+    this.props.denyTakeHomeRequest(requestId, true);
   }
 
   render() {

@@ -25,7 +25,7 @@ export function loadTakeHomeRequests() {
   }
 }
 
-export function approveTakeHomeRequest(id) {
+export function approveTakeHomeRequest(id, fromList = false) {
   return async (dispatch, getState) => {
     dispatch(uiActions.loadStarted());
     const { statusText } = await axios.post(`/api/takehomerequest/${id}/approve`, {});
@@ -35,12 +35,14 @@ export function approveTakeHomeRequest(id) {
       return;
     }
 
-    // TODO: refresh the list?
+    if (fromList) {
+      dispatch(loadTakeHomeRequests());
+    }
     dispatch(uiActions.loadFinished());
   }
 }
 
-export function denyTakeHomeRequest(id) {
+export function denyTakeHomeRequest(id, fromList = false) {
   return async (dispatch, getState) => {
     dispatch(uiActions.loadStarted());
     const { statusText } = await axios.post(`/api/takehomerequest/${id}/approve`, { approve: 'false' });
@@ -50,7 +52,9 @@ export function denyTakeHomeRequest(id) {
       return;
     }
 
-    // TODO: refresh the list?
+    if (fromList) {
+      dispatch(loadTakeHomeRequests());
+    }
     dispatch(uiActions.loadFinished());
   }
 }
